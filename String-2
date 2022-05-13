@@ -81,4 +81,148 @@ public int countCode(String str)
 5.endOther
 Given two strings, return true if either of the strings appears at the very end of the other string, ignoring upper/lower case differences (in other words, the computation should not be "case sensitive"). Note: str.toLowerCase() returns the lowercase version of a string.
 
+public boolean endOther(String a, String b) 
+{
+   int aLen = a.length();
+	int bLen = b.length();
+	String end;
+	String temp;
+	a = a.toLowerCase();
+	b = b.toLowerCase();
+	if(aLen >= bLen)
+	{
+		end = a.substring(aLen - bLen);
+		temp = b;
+	}
+	else
+	{
+		end = b.substring(bLen - aLen);
+		temp = a;
+	}
+	return (end.equals(temp));
+}
+
+
+6.xyzThere
+Return true if the given string contains an appearance of "xyz" where the xyz is not directly preceeded by a period (.). So "xxyz" counts but "x.xyz" does not.
+
+public boolean xyzThere(String str) 
+{
+  int len = str.length() - 2;
+	for(int i = 0; i < len; i++)
+	{
+		if(str.charAt(i) == 'x' && str.charAt(i+1) == 'y' && str.charAt(i+2) == 'z')
+		{
+			if(i == 0 || str.charAt(i-1) != '.')
+				return true;
+		}
+	}
+	return false;
+}
+
+
+7.bobThere
+Return true if the given string contains a "bob" string, but where the middle 'o' char can be any char.
+
+public boolean bobThere(String str) 
+{
+  int l = str.length() - 2;
+	for(int i = 0; i < l; i++)
+	{
+		if(str.charAt(i) == 'b' && str.charAt(i+2) == 'b')
+			return true;
+	}
+	return false;
+}
+
+
+8.xyBalance
+We'll say that a String is xy-balanced if for all the 'x' chars in the string, there exists a 'y' char somewhere later in the string. So "xxy" is balanced, but "xyx" is not. One 'y' can balance multiple 'x's. Return true if the given string is xy-balanced.
+
+public boolean xyBalance(String str) 
+{
+  int len = str.length() - 1;
+	char ch;
+	for(int i = len; i >= 0; i--)
+	{
+		ch = str.charAt(i);
+		if(ch == 'x')
+			return false;
+		else if(ch == 'y')
+			return true;
+	}
+	return true;  
+}
+
+
+9.mixString
+Given two strings, a and b, create a bigger string made of the first char of a, the first char of b, the second char of a, the second char of b, and so on. Any leftover chars go at the end of the result.
+
+public String mixString(String a, String b) 
+{
+  int aL = a.length();
+	int bL = b.length();
+	int i = 0;
+	StringBuilder s = new StringBuilder(aL+bL);
+	for(; i < aL && i < bL; i++)
+	{
+		s.append(a.charAt(i));
+		s.append(b.charAt(i));
+	}
+	for(; i < aL; i++)
+		s.append(a.charAt(i));
+	for(; i < bL; i++)
+		s.append(b.charAt(i));
+	return s.toString();
+}
+
+
+10.repeatEnd
+Given a string and an int n, return a string made of n repetitions of the last n characters of the string. You may assume that n is between 0 and the length of the string, inclusive.
+
+public String repeatEnd(String str, int n) 
+{
+  StringBuilder ma = new StringBuilder(n*n);
+	String l = str.substring(str.length()-n);
+	for(int i = 0; i < n; i++)
+		ma.append(l);
+	return ma.toString();
+}
+
+
+11.repeatFront
+Given a string and an int n, return a string made of the first n characters of the string, followed by the first n-1 characters of the string, and so on. You may assume that n is between 0 and the length of the string, inclusive (i.e. n >= 0 and n <= str.length()).
+
+public String repeatFront(String str, int n) 
+{
+  StringBuilder ma = new StringBuilder((n*n + n)/2);
+	for(int i = n; i >= 1; i--)
+	{
+		for(int j = 0; j < i; j++)
+			ma.append(str.charAt(j));
+	}
+	return ma.toString();
+}
+
+
+12.repeatSeparator
+Given two strings, word and a separator sep, return a big string made of count occurrences of the word, separated by the separator string.
+
+public String repeatSeparator(String word, String sep, int count)
+{
+  if(count == 0)
+		return "";
+	StringBuilder ma = new StringBuilder(count*word.length()+sep.length()*(count-1));
+	for(int i = 1; i < count; i++)
+	{
+		ma.append(word);
+	  ma.append(sep);	
+	}
+  ma.append(word);
+	return ma.toString();
+}
+
+
+13. prefixAgain
+Given a string, consider the prefix string made of the first N chars of the string. Does that prefix string appear somewhere else in the string? Assume that the string is not empty and that N is in the range 1..str.length().
 
