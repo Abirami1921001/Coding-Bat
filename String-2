@@ -226,3 +226,184 @@ public String repeatSeparator(String word, String sep, int count)
 13. prefixAgain
 Given a string, consider the prefix string made of the first N chars of the string. Does that prefix string appear somewhere else in the string? Assume that the string is not empty and that N is in the range 1..str.length().
 
+public boolean prefixAgain(String str, int n) 
+{
+  String prfx = str.substring(0, n);
+	return (str.indexOf(prfx, 1) != -1);
+}
+
+
+14.xyzMiddle
+Given a string, does "xyz" appear in the middle of the string? To define middle, we'll say that the number of chars to the left and right of the "xyz" must differ by at most one. This problem is harder than it looks.
+
+public boolean xyzMiddle(String str) 
+{
+  int l = str.length();
+	int mid;
+	if(l < 3)
+		return false;
+	mid = l/2;
+	if(l%2 == 0)
+	{
+		if(str.charAt(mid) == 'y')
+			return(str.charAt(mid-1) == 'x' && str.charAt(mid+1) == 'z');
+		if(str.charAt(mid-1) == 'y')
+			return(str.charAt(mid-2) == 'x' && str.charAt(mid) == 'z');
+		return false;
+	}
+	else if(str.charAt(mid) == 'y')
+			return(str.charAt(mid-1) == 'x' && str.charAt(mid+1) == 'z');
+	return false;
+}
+
+
+15.getSandwich
+A sandwich is two pieces of bread with something in between. Return the string that is between the first and last appearance of "bread" in the given string, or return the empty string "" if there are not two pieces of bread.
+
+public String getSandwich(String str) 
+{
+  int First = str.indexOf("bread");
+	int Last = str.lastIndexOf("bread");
+	if(First != -1 && Last != -1 && First != Last)
+		return str.substring(First+5, Last);
+	return "";
+}
+
+
+16.sameStarChar
+Returns true if for every '*' (star) in the string, if there are chars both immediately before and after the star, they are the same.
+
+public boolean sameStarChar(String str) 
+{
+  int l = str.length() - 1;
+	for(int i = 1; i < l; i++)
+	{
+		if(str.charAt(i) == '*')
+		{
+			if(str.charAt(i-1) != str.charAt(i+1))
+				return false;
+		}	
+	}
+	return true;
+}
+
+
+17.oneTwo
+Given a string, compute a new string by moving the first char to come after the next two chars, so "abc" yields "bca". Repeat this process for each subsequent group of 3 chars, so "abcdef" yields "bcaefd". Ignore any group of fewer than 3 chars at the end.
+
+public String oneTwo(String str) 
+{
+  String result = "";
+  for(int i=0; i <str.length()-2; i += 3)
+  {
+      result = result + str.substring(i+1,i+3) + str.charAt(i);
+  }
+  return result;
+}
+
+
+18.zipZap
+Look for patterns like "zip" and "zap" in the string -- length-3, starting with 'z' and ending with 'p'. Return a string where for all such words, the middle letter is gone, so "zipXzap" yields "zpXzp".
+
+public String zipZap(String str) 
+{
+  int l = str.length();
+	int li = l - 2;
+	int i = 0;
+	char ch;
+	StringBuilder ma = new StringBuilder(l);
+	while(i < l)
+	{
+		ch = str.charAt(i);
+		if(ch == 'z' && i < li && str.charAt(i+2) == 'p')
+		{
+		ma.append("zp");
+			i += 3;
+		}
+		else
+		{
+			ma.append(ch);
+			i++;
+		}
+	}
+	return ma.toString();
+}
+
+
+19.starOut
+Return a version of the given string, where for every star (*) in the string the star and the chars immediately to its left and right are gone. So "ab*cd" yields "ad" and "ab**cd" also yields "ad".
+
+public String starOut(String str) 
+{
+  int l= str.length();
+	int[] ind = new int[l];
+	char ch;
+	StringBuilder ma = new StringBuilder(l);
+	for(int i = 0; i < l; i++)
+	{
+		if(str.charAt(i) == '*')
+		{
+			ind[i] = 1;
+			if(i >= 1)
+				ind[i-1] = 1;
+			if(i < (l-1))
+				ind[i+1] = 1;
+		}
+	}
+	for(int i = 0; i < l; i++)
+	{
+		if(ind[i] == 0)
+			ma.append(str.charAt(i));
+	}
+	return ma.toString();
+}
+
+
+20.plusOut
+Given a string and a non-empty word string, return a version of the original String where all chars have been replaced by pluses ("+"), except for appearances of the word string which are preserved unchanged.
+
+public String plusOut(String str, String word) 
+{
+  int l = str.length();
+	int wL = word.length();
+	int pos = str.indexOf(word);
+	int i = 0;
+	StringBuilder ma = new StringBuilder(l);
+	while(pos != -1)
+	{
+		while(i < pos)
+		{
+			ma.append('+');
+			i++;
+		}
+		ma.append(word);
+		i = pos + wL;
+		pos = str.indexOf(word, i);
+	}
+	for(; i < l; i++)
+		ma.append('+');
+	return ma.toString();
+}
+
+
+21. wordEnds
+Given a string and a non-empty word string, return a string made of each char just before and just after every appearance of the word in the string. Ignore cases where there is no char before or after the word, and a char may be included twice if it is between two words.
+
+public String wordEnds(String str, String word) 
+{
+  int l = str.length();
+	int wL = word.length();
+	int pos = str.indexOf(word);
+	int i = 0;
+	StringBuilder stbuild = new StringBuilder(l);
+	while(pos != -1)
+	{
+		i = pos + wL;
+		if(pos >= 1)
+			stbuild.append(str.charAt(pos-1));
+		if(i < l)
+			stbuild.append(str.charAt(pos+wL));
+		pos = str.indexOf(word, i);	
+	}
+	return stbuild.toString();
+}
