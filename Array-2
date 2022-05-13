@@ -1,5 +1,315 @@
-//1.countEvens
-//Return the number of even ints in the given array. Note: the % "mod" operator computes the remainder, e.g. 5 % 2 is 1.
-countEvens([2, 1, 2, 3, 4]) → 3
-countEvens([2, 2, 0]) → 3
-countEvens([1, 3, 5]) → 0
+1.countEvens
+Return the number of even ints in the given array. Note: the % "mod" operator computes the remainder, e.g. 5 % 2 is 1.
+
+public int countEvens(int[] nums) 
+{
+  int even = 0;
+  for (int c=0; c < nums.length; c++) 
+  {
+  if (nums[c] % 2 == 0)
+  even++;
+  }
+  
+  return even;
+  
+}
+
+
+2.bigDiff
+Given an array length 1 or more of ints, return the difference between the largest and smallest values in the array. Note: the built-in Math.min(v1, v2) and Math.max(v1, v2) methods return the smaller or larger of two values.
+
+public int bigDiff(int[] nums) 
+{
+  int max = nums[0];
+	int min = nums[0];
+	for(int i = 1; i < nums.length; i++)
+	{
+		if(nums[i] > max)
+			max = nums[i];
+		else if(nums[i] < min)
+			min = nums[i];
+	}
+	return (max-min);
+}
+
+
+3.centeredAverage
+Return the "centered" average of an array of ints, which we'll say is the mean average of the values, except ignoring the largest and smallest values in the array. If there are multiple copies of the smallest value, ignore just one copy, and likewise for the largest value. Use int division to produce the final average. You may assume that the array is length 3 or more.
+
+public int centeredAverage(int[] nums) 
+{
+  int max = nums[0];
+	int min = nums[0];
+	int sum = nums[0];
+	for(int i = 1; i < nums.length; i++)
+	{
+		sum  += nums[i];
+		if(nums[i] > max)
+			max = nums[i];
+		else if(nums[i] < min)
+			min = nums[i];
+	}
+	return (sum-max-min) / (nums.length - 2);
+}
+
+
+4.sum13
+Return the sum of the numbers in the array, returning 0 for an empty array. Except the number 13 is very unlucky, so it does not count and numbers that come immediately after a 13 also do not count.
+
+public int sum13(int[] nums) 
+{
+  int sum = 0;
+	for(int i = 0; i < nums.length; i++)
+	{
+		if(nums[i] == 13)
+			i++;
+		else
+			sum += nums[i];
+	}
+	return sum;
+}
+
+
+5.sum67
+Return the sum of the numbers in the array, except ignore sections of numbers starting with a 6 and extending to the next 7 (every 6 will be followed by at least one 7). Return 0 for no numbers.
+
+public int sum67(int[] nums) 
+{
+  int sum = 0;
+	boolean sixMode = false;
+	for(int i = 0; i < nums.length; i++)
+	{
+		if(sixMode)
+		{
+			if(nums[i] == 7)
+				sixMode = false;
+		}
+		else if(nums[i] == 6)
+			sixMode = true;
+		else
+			sum += nums[i];
+	}
+	return sum;
+}
+
+
+6.has22
+Given an array of ints, return true if the array contains a 2 next to a 2 somewhere.
+
+public boolean has22(int[] nums) 
+{
+  for(int i = 0; i < nums.length-1; i++)
+  {
+  	if(nums[i] == 2 && nums[i+1] == 2)
+  		return true;
+  }
+  return false;
+}
+
+
+7. lucky13
+Given an array of ints, return true if the array contains no 1's and no 3's.
+
+public boolean lucky13(int[] nums) 
+{
+  for(int i = 0; i < nums.length; i++)
+  {
+  	if(nums[i] == 1 || nums[i] == 3)
+  		return false;
+  }
+  return true;  
+}
+
+
+8.sum28
+Given an array of ints, return true if the sum of all the 2's in the array is exactly 8
+
+public boolean sum28(int[] nums) 
+{
+  int sum = 0;
+	for(int i = 0; i < nums.length; i++)
+	{
+		if(nums[i] == 2)
+			sum += 2;
+	}
+	return (sum == 8);
+}
+
+
+9.more14
+Given an array of ints, return true if the number of 1's is greater than the number of 4's
+
+public boolean more14(int[] nums)
+{
+  int balance = 0;
+	for(int i = 0; i < nums.length; i++)
+	{
+		if(nums[i] == 1)
+			balance++;
+		else if(nums[i] == 4)
+			balance--;
+	}
+	return (balance > 0);
+}
+
+
+10.fizzArray
+Given a number n, create and return a new int array of length n, containing the numbers 0, 1, 2, ... n-1. The given n may be 0, in which case just return a length 0 array. You do not need a separate if-statement for the length-0 case; the for-loop should naturally execute 0 times in that case, so it just works. The syntax to make a new int array is: new int[desired_length]  
+
+public int[] fizzArray(int n) 
+{
+  int[] arr = new int[n];
+    
+    for(int i = 0; i < n; i++)
+        arr[i] = i;
+              
+    return arr;
+}
+
+
+11.only14
+Given an array of ints, return true if every element is a 1 or a 4.
+
+public boolean only14(int[] nums) 
+{
+  boolean isTrue = true;
+  
+  for (int i = 0; i < nums.length; i++) {
+    if (nums[i] != 1 && nums[i] != 4)
+      isTrue = false;
+  }
+  return isTrue;
+}
+
+
+12.fizzArray2
+Given a number n, create and return a new string array of length n, containing the strings "0", "1" "2" .. through n-1. N may be 0, in which case just return a length 0 array. Note: String.valueOf(xxx) will make the String form of most types. The syntax to make a new string array is: new String[desired_length]
+
+public String[] fizzArray2(int n) 
+{
+   String[] result = new String[n];
+    for (int i = 0; i < n; i++)
+        result[i] = String.valueOf(i);
+    return result;
+}
+
+
+13.no14
+Given an array of ints, return true if it contains no 1's or it contains no 4's.
+
+public boolean no14(int[] nums) 
+{
+   boolean found1 = false;
+  boolean found4 = false;
+  
+  for (int i = 0; i < nums.length; i++) {
+    if (nums[i] == 1)
+      found1 = true;
+    if (nums[i] == 4)
+      found4 = true;
+  }
+  if (found1 && found4)
+    return false;
+  else
+    return true;
+}
+
+
+14.isEverywhere
+We'll say that a value is "everywhere" in an array if for every pair of adjacent elements in the array, at least one of the pair is that value. Return true if the given value is everywhere in the array.
+
+public boolean isEverywhere(int[] nums, int val) 
+{
+  boolean result = true;
+  for (int i = 0; i <=nums.length-2;i++)
+    {
+    if ( nums[i] != val && nums[i+1] != val)
+    result = false;
+    }
+  return result;
+}
+
+
+15.either24
+Given an array of ints, return true if the array contains a 2 next to a 2 or a 4 next to a 4, but not both.
+
+public boolean either24(int[] nums) 
+{
+  int two =0, four = 0;
+for (int i =0;i<nums.length-1;i++)
+{
+if(nums[i] == 2 && nums[i+1] == 2)
+two++;
+if (nums[i] == 4 && nums[i+1] == 4)
+four++;
+}
+if (two!=0 && four!=0)
+return false;
+else if (two!=0 || four!=0)
+return true;
+else
+return false;
+}
+
+
+16.matchUp
+Given arrays nums1 and nums2 of the same length, for every element in nums1, consider the corresponding element in nums2 (at the same index). Return the count of the number of times that the two elements differ by 2 or less, but are not equal.
+
+public int matchUp(int[] nums1, int[] nums2) 
+{
+  int count =0;
+  for (int i =0; i <nums1.length ;i++)
+  if (Math.abs(nums1[i] - nums2[i]) == 1 || Math.abs(nums1[i] -nums2[i]) == 2 )
+  count++;
+  return count;
+}
+
+
+17.has77
+Given an array of ints, return true if the array contains two 7's next to each other, or there are two 7's separated by one element, such as with {7, 1, 7}.
+
+public boolean has77(int[] nums)
+{
+  for(int i = 0; i<nums.length-1;i++)
+  {
+    if(nums[i]==7 && (nums[i+1]==7 || (i<nums.length-2&&nums[i+2]==7))) return true;
+  }
+  return false;
+}
+
+
+18.has12
+Given an array of ints, return true if there is a 1 in the array with a 2 somewhere later in the array.
+
+public boolean has12(int[] nums) 
+{
+  boolean foundOne = false;
+  boolean foundOneTwo = false;
+  
+  for (int i = 0; i < nums.length; i++) {
+    if (nums[i] == 1)
+      foundOne = true;
+    if (nums[i] == 2 && foundOne)
+      foundOneTwo = true;
+  }
+  return foundOneTwo;
+}
+
+
+19.modThree
+Given an array of ints, return true if the array contains either 3 even or 3 odd values all next to each other.
+
+public boolean modThree(int[] nums) 
+{
+  boolean result = false;
+  for (int i = 0;i<nums.length-2;i++)
+  if( (nums[i] % 2 == 0 && nums[i+1] % 2 == 0 && nums[i+2] % 2 == 0)|| (!(nums[i] % 2 == 0) && !(nums[i+1] % 2 == 0) && !(nums[i+2] % 2 == 0)))
+    result = true;
+    
+    return result;
+}
+
+
+20.haveThree
+Given an array of ints, return true if the value 3 appears in the array exactly 3 times, and no 3's are next to each other.
+
