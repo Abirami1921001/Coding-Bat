@@ -1,0 +1,84 @@
+1.doubleChar
+Given a string, return a string where for every char in the original, there are two chars.
+
+public String doubleChar(String str) 
+{
+  String love = "";
+    for (int i = 0; i <=str.length()-1;i++) 
+    {
+           love += str.charAt(i);
+           love += str.charAt(i); 
+      
+    }
+           return love;
+}
+
+
+2.countHi
+Return the number of times that the string "hi" appears anywhere in the given string.
+
+public int countHi(String str)
+{
+  int count=0;
+  if(str.length()==1 && str.charAt(0)=='h')
+  count =0;
+  else
+  {
+    for(int i=0;i<str.length();i++)
+    {
+      if((str.charAt(i)=='h') && (str.charAt(i+1)=='i'))
+      count++;
+    }
+  }
+  return count;
+}
+
+
+3.catDog
+Return true if the string "cat" and "dog" appear the same number of times in the given string.
+
+public boolean catDog(String str)
+{
+  int cat=0;
+  int dog=0;
+  int i;
+  String temp;
+  for(i=0;i<str.length()-2;i++)
+  {
+    temp=str.substring(i,i+3);
+    if(temp.equals("cat"))
+    cat++;
+    if(temp.equals("dog"))
+    dog++;
+  }
+  if(cat==dog)
+  return true;
+  return false;
+}
+
+
+4.countCode
+Return the number of times that the string "code" appears anywhere in the given string, except we'll accept any letter for the 'd', so "cope" and "cooe" count.
+
+public int countCode(String str) 
+{
+  int i , count=0;
+  String a="co";
+  String b="e";
+  if(str.length()<4)
+  {
+    return 0;
+  }
+  for(i=0;i<str.length()-3;i++)
+  {
+    if(str.substring(i,i+2).equals("co")&&str.substring(i+3,i+4).equals("e"))
+  count++;
+  }
+  return count;
+}
+
+
+5.endOther
+Given two strings, return true if either of the strings appears at the very end of the other string, ignoring upper/lower case differences (in other words, the computation should not be "case sensitive"). Note: str.toLowerCase() returns the lowercase version of a string.
+
+
