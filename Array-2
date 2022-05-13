@@ -4,12 +4,11 @@ Return the number of even ints in the given array. Note: the % "mod" operator co
 public int countEvens(int[] nums) 
 {
   int even = 0;
-  for (int c=0; c < nums.length; c++) 
-  {
-  if (nums[c] % 2 == 0)
-  even++;
-  }
-  
+  	for (int c=0; c < nums.length; c++) 
+ 	{
+  		if (nums[c] % 2 == 0)
+  		even++;
+  	}
   return even;
   
 }
@@ -174,7 +173,8 @@ public boolean only14(int[] nums)
 {
   boolean isTrue = true;
   
-  for (int i = 0; i < nums.length; i++) {
+  for (int i = 0; i < nums.length; i++) 
+  {
     if (nums[i] != 1 && nums[i] != 4)
       isTrue = false;
   }
@@ -202,7 +202,8 @@ public boolean no14(int[] nums)
    boolean found1 = false;
   boolean found4 = false;
   
-  for (int i = 0; i < nums.length; i++) {
+  for (int i = 0; i < nums.length; i++) 
+  {
     if (nums[i] == 1)
       found1 = true;
     if (nums[i] == 4)
@@ -236,19 +237,19 @@ Given an array of ints, return true if the array contains a 2 next to a 2 or a 4
 public boolean either24(int[] nums) 
 {
   int two =0, four = 0;
-for (int i =0;i<nums.length-1;i++)
-{
-if(nums[i] == 2 && nums[i+1] == 2)
-two++;
-if (nums[i] == 4 && nums[i+1] == 4)
-four++;
-}
-if (two!=0 && four!=0)
-return false;
-else if (two!=0 || four!=0)
-return true;
-else
-return false;
+	for (int i =0;i<nums.length-1;i++)
+	{
+		if(nums[i] == 2 && nums[i+1] == 2)
+		two++;
+	if (nums[i] == 4 && nums[i+1] == 4)
+		four++;
+	}
+	if (two!=0 && four!=0)
+	return false;
+	else if (two!=0 || four!=0)
+	return true;
+	else
+	return false;
 }
 
 
@@ -305,7 +306,6 @@ public boolean modThree(int[] nums)
   for (int i = 0;i<nums.length-2;i++)
   if( (nums[i] % 2 == 0 && nums[i+1] % 2 == 0 && nums[i+2] % 2 == 0)|| (!(nums[i] % 2 == 0) && !(nums[i+1] % 2 == 0) && !(nums[i+2] % 2 == 0)))
     result = true;
-    
     return result;
 }
 
@@ -313,3 +313,296 @@ public boolean modThree(int[] nums)
 20.haveThree
 Given an array of ints, return true if the value 3 appears in the array exactly 3 times, and no 3's are next to each other.
 
+public boolean haveThree(int[] nums) 
+{
+  int count = 0;
+  boolean found = false;
+  for (int i = 0; i < nums.length; i++) {
+    if (nums[i] != 3)
+      found = false;
+    if (nums[i] == 3 && found == true)
+      return false;
+    if (nums[i] == 3 && found == false) {
+      found = true;
+      count++;
+    }
+  }
+  if (count == 3)
+    return true;
+  else
+   return false;
+}
+
+
+21. twoTwo
+Given an array of ints, return true if every 2 that appears in the array is next to another 2.
+
+public boolean twoTwo(int[] nums) 
+{
+  int index =0;
+  for (int i=0; i<(nums.length); i++)
+  {
+    if(nums[i]==2)
+    {
+      i++;
+    if(!(i<(nums.length)) || nums[i] !=2) return false;
+    while(i<nums.length && nums[i] ==2) i++;
+    }
+  }
+return true;
+}
+
+
+22.sameEnds
+Return true if the group of N numbers at the start and end of the array are the same. For example, with {5, 6, 45, 99, 13, 5, 6}, the ends are the same for n=0 and n=2, and false for n=1 and n=3. You may assume that n is in the range 0..nums.length inclusive.
+
+public boolean sameEnds(int[] nums, int len) 
+{
+  boolean result = true;
+  int range = len;
+  for (int i =0; i <range;i++)
+  if (!(nums[i] == nums[nums.length - range + i]))
+  result = false;
+  return result;
+}
+
+
+23.tripleUp
+Return true if the array contains, somewhere, three increasing adjacent numbers like .... 4, 5, 6, ... or 23, 24, 25.
+
+public boolean tripleUp(int[] nums) 
+{
+  boolean result = false;
+  for (int i =0;i < nums.length-2;i++)
+  if ( (nums[i] + 1 == nums[i+1]) && (nums[i+1] + 1 == nums[i+2]) )
+  result = true;
+  return result;
+}
+
+
+24. fizzArray3
+Given start and end numbers, return a new array containing the sequence of integers from start up to but not including end, so start=5 and end=10 yields {5, 6, 7, 8, 9}. The end number will be greater or equal to the start number. Note that a length-0 array is valid. 
+
+public int[] fizzArray3(int start, int end) 
+{
+  int n = end - start;
+    int[] result = new int[n];
+  for (int i = 0; i < n; i++)
+        result[i] = start++;
+    return result;
+}
+
+
+25.shiftLeft
+Return an array that is "left shifted" by one -- so {6, 2, 5, 3} returns {2, 5, 3, 6}. You may modify and return the given array, or return a new array.
+
+public int[] shiftLeft(int[] nums) 
+{
+  int[] f;
+  f = new int[nums.length];
+  if (nums.length == 0)
+    return f;
+  for (int i = 0; i < nums.length-1; i++) {
+    if (i > 0)
+      f[i] = nums[i+1];
+  }
+  if (nums.length > 1)
+    f[0] = nums[1];
+  f[nums.length-1] = nums[0];
+  return f;
+}
+
+
+26. tenRun
+For each multiple of 10 in the given array, change all the values following it to be that multiple of 10, until encountering another multiple of 10. So {2, 10, 3, 4, 20, 5} yields {2, 10, 10, 10, 20, 20}.
+
+public int[] tenRun(int[] nums) 
+{
+  for(int i = 0; i < nums.length;i++)
+  {
+ 	if ( nums[i] % 10 == 0)
+  {
+  for (int j = i +1; j < nums.length && !(nums[j] % 10 == 0) ; j++) nums[j] = nums[i];
+  }
+  }
+  return nums;
+}
+
+
+27. pre4
+Given a non-empty array of ints, return a new array containing the elements from the original array that come before the first 4 in the original array. The original array will contain at least one 4. Note that it is valid in java to create an array of length 0.
+
+public int[] pre4(int[] nums)
+{
+  for (int i = 0; i < nums.length; i++)
+  {
+    if (nums[i] == 4 && i > 0) 
+    {
+      int[] f;
+      f = new int[i];
+      for (int j = 0; j < f.length; j++) 
+      {
+        f[j] = nums[j];
+      }
+      if (nums[0] != 4)
+        return f;
+    }
+  }
+  int[] b;
+  b = new int[0];
+  return b;
+}
+
+
+28.post4
+Given a non-empty array of ints, return a new array containing the elements from the original array that come after the last 4 in the original array. The original array will contain at least one 4. Note that it is valid in java to create an array of length 0.
+
+public int[] post4(int[] nums) 
+{
+  for (int i = nums.length-1; i >= 0; i--) 
+  {
+    if (nums[i] == 4) 
+    {
+      int[] f;
+      f= new int[nums.length-i-1];
+
+      for (int j = 0; j < f.length; j++)
+      {
+        f[j] = nums[i+j+1];
+      }
+      return f;
+    }
+  }
+  int[] a;
+  a = new int[0];
+  return a;
+}
+
+
+29.notAlone
+We'll say that an element in an array is "alone" if there are values before and after it, and those values are different from it. Return a version of the given array where every instance of the given value which is alone is replaced by whichever value to its left or right is larger.
+
+public int[] notAlone(int[] nums, int val)
+{
+  for (int i= 1;i<nums.length -1;i++)
+  {
+    if (nums[i] == val)
+    if (nums[i-1] != nums[i] && nums[i+1] != nums[i])
+    if (nums[i+1] > nums[i-1]) nums[i] = nums[i+1];
+    else if (nums[i+1] < nums[i-1]) nums[i] = nums[i-1];
+  }
+   return nums;
+}
+
+
+30.zeroFront
+Return an array that contains the exact same numbers as the given array, but rearranged so that all the zeros are grouped at the start of the array. The order of the non-zero numbers does not matter. So {1, 0, 0, 1} becomes {0 ,0, 1, 1}. You may modify and return the given array or make a new array.
+
+public int[] zeroFront(int[] nums) 
+{
+   int count = 0;
+  for (int i = 0; i < nums.length; i++)
+  {
+    if (nums[i] == 0) 
+    {
+      nums[i] = nums[count];
+      nums[count] = 0;
+      count++;
+    }
+  }
+  return nums;
+}
+
+
+31.withoutTen
+Return a version of the given array where all the 10's have been removed. The remaining elements should shift left towards the start of the array as needed, and the empty spaces a the end of the array should be 0. So {1, 10, 10, 2} yields {1, 2, 0, 0}. You may modify and return the given array or make a new array.
+
+public int[] withoutTen(int[] nums) 
+{
+  int[] result = new int[nums.length];
+  int j = 0;
+  for(int i = 0; i < nums.length; i++) 
+  {
+    if(nums[i] == 10) 
+    {
+    } 
+    else 
+    {
+      result[j] = nums[i];
+      j++;
+    }
+  }
+  for(int i = j; i < nums.length; i++) 
+  {
+    result[i] = 0;
+  }
+  return result;
+}
+
+
+32. zeroMax
+Return a version of the given array where each zero value in the array is replaced by the largest odd value to the right of the zero in the array. If there is no odd value to the right of the zero, leave the zero as a zero.
+
+public int[] zeroMax(int[] nums) 
+{
+  int max = 0;
+  for (int i = nums.length-1; i >= 0; i--) 
+  {
+    if (nums[i] % 2 != 0)
+      max = Math.max(max, nums[i]);
+    if (nums[i] == 0)
+          nums[i] = max;
+  }
+  return nums;
+}
+
+
+33. evenOdd
+Return an array that contains the exact same numbers as the given array, but rearranged so that all the even numbers come before all the odd numbers. Other than that, the numbers can be in any order. You may modify and return the given array, or make a new array.
+
+public int[] evenOdd(int[] nums) 
+{
+  int i = 0;
+    while(i < nums.length && nums[i] % 2 == 0)
+        i++;
+    for(int j = i + 1; j < nums.length; j++) 
+    {
+        if(nums[j] % 2 == 0) 
+        {
+            int temp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = temp;
+            i++;
+        }
+    }
+    return nums;
+}
+
+
+34.fizzBuzz
+This is slightly more difficult version of the famous FizzBuzz problem which is sometimes given as a first problem for job interviews. (See also: FizzBuzz Code.) Consider the series of numbers beginning at start and running up to but not including end, so for example start=1 and end=5 gives the series 1, 2, 3, 4. Return a new String[] array containing the string form of these numbers, except for multiples of 3, use "Fizz" instead of the number, for multiples of 5 use "Buzz", and for multiples of both 3 and 5 use "FizzBuzz". In Java, String.valueOf(xxx) will make the String form of an int or other type. This version is a little more complicated than the usual version since you have to allocate and index into an array instead of just printing, and we vary the start/end instead of just always doing 1..100.
+
+public String[] fizzBuzz(int start, int end) 
+{
+  String[] arr = new String[end - start];
+    for(int i = start; i < end; i++) 
+    {
+        if(i % 15 == 0) 
+        {
+            arr[i - start] = "FizzBuzz";
+        } 
+        else if(i % 3 == 0) 
+        {
+            arr[i - start] = "Fizz";
+        } 
+        else if(i % 5 == 0)
+        {
+            arr[i - start] = "Buzz";
+        } 
+        else 
+        {
+            arr[i - start] = String.valueOf(i);
+        }
+    }
+    return arr;
+}
